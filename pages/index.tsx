@@ -1,4 +1,5 @@
 import { Chat } from "@/components/Chat/Chat";
+import { ChatInput } from "@/components/Chat/ChatInput";
 import { Footer } from "@/components/Layout/Footer";
 import { Navbar } from "@/components/Layout/Navbar";
 import { Message } from "@/types";
@@ -119,15 +120,18 @@ export default function Home() {
       <div className="flex flex-col h-screen">
         <Navbar />
 
-        <div className="flex-1 overflow-auto sm:px-10 pb-4 sm:pb-10">
-          <div className="max-w-[800px] mx-auto mt-4 sm:mt-12">
-            <Chat
-              messages={messages}
-              loading={loading}
-              onSend={handleSend}
-              onReset={handleReset}
-            />
-            <div ref={messagesEndRef} />
+        <div className="flex-1 flex flex-col px-4 sm:px-10 pb-4 sm:pb-10">
+          <div className="flex-1 flex flex-col max-w-[800px] mx-auto">
+            {/* 消息滚动区域 */}
+            <div className="flex-1 overflow-auto mt-4 sm:mt-12 space-y-4 sm:space-y-6">
+              <Chat messages={messages} loading={loading} />
+              <div ref={messagesEndRef} />
+            </div>
+
+            {/* 固定在内容区域底部的输入框（与消息同一列宽度） */}
+            <div className="mt-2 sm:mt-4">
+              <ChatInput onSend={handleSend} />
+            </div>
           </div>
         </div>
         <Footer />

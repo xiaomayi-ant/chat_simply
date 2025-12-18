@@ -45,21 +45,26 @@ export const ChatInput: FC<Props> = ({ onSend }) => {
   }, [content]);
 
   return (
-    <div className="relative">
-      <textarea
-        ref={textareaRef}
-        className="min-h-[44px] rounded-lg pl-4 pr-12 py-2 w-full focus:outline-none focus:ring-1 focus:ring-neutral-300 border-2 border-neutral-200"
-        style={{ resize: "none" }}
-        placeholder="Type a message..."
-        value={content}
-        rows={1}
-        onChange={handleChange}
-        onKeyDown={handleKeyDown}
-      />
+    <div className="w-full">
+      <div className="flex items-center w-full rounded-2xl border-2 border-neutral-200 px-3 py-2">
+        <textarea
+          ref={textareaRef}
+          className="flex-1 min-h-[32px] max-h-[200px] resize-none bg-transparent focus:outline-none focus:ring-0"
+          placeholder="Type a message..."
+          value={content}
+          rows={1}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+        />
 
-      <button onClick={() => handleSend()}>
-        <IconArrowUp className="absolute right-2 bottom-3 h-8 w-8 hover:cursor-pointer rounded-full p-1 bg-blue-500 text-white hover:opacity-80" />
-      </button>
+        <button
+          type="button"
+          onClick={handleSend}
+          className="ml-2 hover:opacity-80"
+        >
+          <IconArrowUp className="h-8 w-8 hover:cursor-pointer rounded-full p-1 bg-blue-500 text-white" />
+        </button>
+      </div>
     </div>
   );
 };
