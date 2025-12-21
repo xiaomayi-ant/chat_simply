@@ -1,5 +1,6 @@
 import { Message } from "@/types";
 import { FC } from "react";
+import ReactMarkdown from "react-markdown";
 
 interface Props {
   message: Message;
@@ -16,7 +17,29 @@ export const ChatMessage: FC<Props> = ({ message }) => {
         } rounded-2xl px-3 py-2 whitespace-pre-wrap`}
         style={{ overflowWrap: "anywhere" }}
       >
-        {message.content}
+        {message.role === "assistant" ? (
+          <ReactMarkdown
+            components={{
+              // 优化图片显示样式，防止图太大撑破布局
+              img: ({ node, ...props }) => (
+                <img
+                  {...props}
+                  style={{
+                    maxWidth: "100%",
+                    borderRadius: "8px",
+                    marginTop: "10px",
+                    display: "block",
+                  }}
+                  alt={props.alt || "Chart"}
+                />
+              ),
+            }}
+          >
+            {message.content}
+          </ReactMarkdown>
+        ) : (
+          message.content
+        )}
       </div>
     </div>
   );
