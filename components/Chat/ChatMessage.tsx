@@ -10,7 +10,7 @@ export const ChatMessage: FC<Props> = ({ message }) => {
   return (
     <div className={`flex flex-col ${message.role === "assistant" ? "items-start" : "items-end"}`}>
       <div
-        className={`flex items-center w-full ${
+        className={`inline-block max-w-full ${
           message.role === "assistant"
             ? "bg-neutral-100 text-neutral-900"
             : "bg-blue-500 text-white"
